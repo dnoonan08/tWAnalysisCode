@@ -1,0 +1,13 @@
+Universe = vanilla
+ InitialDir = /home/t3-ku/dnoonan/TMVA-v4.1.2/test
+ Executable = /home/t3-ku/dnoonan/TMVA-v4.1.2/test/tmvaBDT.sh
+ Arguments = $(Process)
+ Should_Transfer_Files = YES
+ WhenToTransferOutput = ON_EXIT
+ x509userproxy=/tmp/x509up_u1767
+ RequestMemory = 2000
+
+ Output = condor_output/condor_tmvaBDT_$(Process).out
+ Log    = condor_output/condor_tmvaBDT_$(Process).log
+ Error  = condor_output/condor_tmvaBDT_$(Process).err
+ Queue 21
