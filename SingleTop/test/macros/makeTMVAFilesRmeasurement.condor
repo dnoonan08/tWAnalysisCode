@@ -1,0 +1,13 @@
+Universe = vanilla
+InitialDir = /home/t3-ku/dnoonan/8TeV_ProductionTest/CMSSW_5_3_11/src/TopQuarkAnalysis/SingleTop/test/macros
+Executable = /home/t3-ku/dnoonan/8TeV_ProductionTest/CMSSW_5_3_11/src/TopQuarkAnalysis/SingleTop/test/macros/makeTMVAFilesRmeasurement.sh
+Arguments = $(Process)
+Should_Transfer_Files = YES
+WhenToTransferOutput = ON_EXIT
+x509userproxy=/tmp/x509up_u1767
+RequestMemory = 2000
+
+Output = condor_output/condor_tmvaFileRmeasurement_$(Process).out
+Log    = condor_output/condor_tmvaFileRmeasurement_$(Process).log
+Error  = condor_output/condor_tmvaFileRmeasurement_$(Process).err
+Queue 29

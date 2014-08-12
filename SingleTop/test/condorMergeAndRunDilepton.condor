@@ -1,0 +1,12 @@
+Universe = vanilla
+ InitialDir = /home/t3-ku/dnoonan/8TeV_ProductionTest/CMSSW_5_3_11/src/TopQuarkAnalysis/SingleTop/test
+ Executable = /home/t3-ku/dnoonan/8TeV_ProductionTest/CMSSW_5_3_11/src/TopQuarkAnalysis/SingleTop/test/condorMergeAndRunDilepton.sh
+ Arguments = $(Process)
+ Should_Transfer_Files = YES
+ WhenToTransferOutput = ON_EXIT
+ x509userproxy=/tmp/x509up_u1767
+ RequestMemory = 3000
+ Output = condor_output/condor_MergeAndRunDilepton_$(Process).out
+ Log    = condor_output/condor_MergeAndRunDilepton_$(Process).log
+ Error  = condor_output/condor_MergeAndRunDilepton_$(Process).err
+ Queue 15

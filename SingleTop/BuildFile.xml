@@ -1,0 +1,32 @@
+<use   name="FWCore/Framework"/>
+<use   name="PhysicsTools/Utilities"/>
+<use   name="FWCore/Utilities"/>
+<use   name="RecoBTag/PerformanceDB"/>
+<use   name="RecoBTag/Records"/>
+<use   name="JetMETCorrections/Objects"/>
+<use   name="CondFormats/JetMETObjects"/>
+<use   name="FWCore/ParameterSet"/>
+<use   name="RecoEgamma/EgammaTools"/>
+<use   name="MagneticField/Engine"/>
+<use   name="MagneticField/Records"/>
+<use   name="root"/>
+<use   name="rootrflx"/>
+<use   name="rootminuit"/>
+<use   name="hepmc"/>
+<use   name="PhysicsTools/UtilAlgos"/>
+<use   name="CommonTools/UtilAlgos"/>
+<use   name="PhysicsTools/CandUtils"/>
+<use   name="PhysicsTools/SelectorUtils"/>
+<use   name="DataFormats/PatCandidates"/>
+<use   name="TrackingTools/IPTools"/>
+<use   name="TrackingTools/TransientTrack"/>
+<use   name="DataFormats/METReco"/>
+<use   name="EGamma/EGammaAnalysisTools"/>
+<use   name="RecoParticleFlow/PFProducer"/>
+<use   name="lhapdf"/>
+<flags   EDM_PLUGIN="1"/>
+<flags   CXXFLAGS="-g"/>
+<flags   GENREFLEX_ARGS="--"/>
+<export>
+  <lib   name="1"/>
+</export>
