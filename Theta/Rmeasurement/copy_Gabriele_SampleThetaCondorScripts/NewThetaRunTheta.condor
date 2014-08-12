@@ -1,0 +1,11 @@
+Universe = vanilla
+ InitialDir = CURRENTDIR
+ Executable = CURRENTDIR/NewThetaRunTheta.sh
+ Arguments = $(Process)
+ x509userproxy=/tmp/x509up_u1767
+ RequestMemory = 2000
+
+ Output = condor_output/condor_NewThetaRunTheta_$(Process).out
+ Log    = condor_output/condor_NewThetaRunTheta_$(Process).log
+ Error  = condor_output/condor_NewThetaRunTheta_$(Process).err
+ Queue 7

@@ -1,0 +1,11 @@
+Universe = vanilla
+ InitialDir = CURRENTDIR
+ Executable = CURRENTDIR/NewTHETACHAN.sh
+ Arguments = $(Process)
+ x509userproxy=/tmp/x509up_u1767
+ RequestMemory = 2000
+
+ Output = condor_output/condor_NewTHETACHAN_$(Process).out
+ Log    = condor_output/condor_NewTHETACHAN_$(Process).log
+ Error  = condor_output/condor_NewTHETACHAN_$(Process).err
+ Queue MAXSUBMISSIONS
