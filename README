@@ -1,0 +1,10 @@
+This repository contains the code for the production, analysis, and plotting of the tW data at 8 TeV.  The code is split among three directories, each which is meant for different programs.
+
+SingleTop: This is branched off of the TopQuarkAnalysis/SingleTop packaged devloped for the t-channel analysis.  This code was written and used in CMSSW_5_3_11.  Various levels of files are created.  Crab is used to run create PAT and EDMntuples, a second script uses condor to produce ntuples from the data (completely outside of the CMSSW EDM framework), and lastly the event selection is run and input files for TMVA are produced.
+
+TMVA: This is the code that is used to run the BDT analysis using TMVA.  This is not the TMVA pacakge itself, just scripts I have written to use TMVA.  These scripts allow for plotting of all the variables, as well as creating the input root files containing the BDT histograms for use by Theta.
+
+Theta: Scripts put together to run the fit to the BDT discriminant distribution using Theta.  Again, this is not the Theta package itself, just scripts designed to be run using Theta.  Runs the fit to the BDT discriminant using input root files to find the significance and cross section for the tW signal, as well as measurements of the t/tbar ratio.
+
+
+
