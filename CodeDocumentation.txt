@@ -1,0 +1,57 @@
+This is an explanation of the code structure for the 8 TeV tW dilepton analysis
+
+Three directories exist in the tWAnalyssisCode directory in github: 
+SingleTop - CMSSW code for processing Data/MC files on crab to produce patTuple/edmntuples which are then made in normal root ntuple files (no cmssw required)
+Theta - code for running theta for fit to BDT discriminant
+TMVA - code for training and running BDT on data and MC TMVA input ntuples
+
+
+SingleTop:
+
+In SingleTop/test directory is the code for two main steps:
+1 - Running on the AODSIM files to produce EDMntuples (typically via CRAB)
+2 - Running on the EDMntuples to produce root ntuples for all the systematics (JES, JER, Btagging, etc.)
+
+Also in this directory is the macros folder.  This contains all of the python macros I have written for running on the root ntuples output from the previous step (including the full cutflow, and creating the input root files for TMVA).
+
+Important Files in the macros directory:
+ - TMVATupleCreator_v5_Rmeasurement.py: This is the main file for producing the input files used for running the BDT.  It produces a root file with a large number of potential input variables, both for the standard BDT separating tW from ttbar as well as the tW reconstruction BDT.  This is run for each MC sample and data set.  This is where the cutflow is implemented.
+
+ - BtagSF.py : This is used by the TMVATupleCreator script to get the calculate the Btagging SF for a jet given its pt for CSV medium working point tagger (using the formula from the BTag group)
+
+ - ZjetMETchecks.py: Runs on the events inside the Z-mass peak to calculate MET based scale factors in the ee and mumu channels for Z+jets events. ZjetMETClosurePlots.py is similar, but produces plots of MET and other variables to check the agreement after the SF's are applied (make sure that the MET lines up exactly with data after the SF are used).
+
+ - makeTMVAFilesRmeasurement.condor & makeTMVAFilesRmeasurement.sh: condor scripts for running the TMVATupleCreator_v5_Rmeasurement.py on all the different data and MC samples.  Additionally, the makeTMVAFilesRmeasurementSyst.sh condor script is used for running all of the systematics samples on the MC files.
+
+ - getCutflow_v2.py: Makes a simple plot showing the number of events passing each step of the cutflow.  Is run using the makeCutflows condor scripts.
+
+ - fileLoadDict_storeUser.py:  This is a dictionary for all samples.  Each entry contains a list, the first spot is the name of what type of sample it is (TWChannl, TTbar, ZJets, Dataetc.), the second spot is a list of root ntuples (produced from the second step in the test directory running) which are stored in a store/user area on the tier3, and the last spot is the name of the output root file which will be created by the TMVATupleCreator scripts when the sample is run.
+
+ - plotVariables.py: plot the input variables to the BDT (this will not include a systematics band).
+
+ - plotSystematics.py: produces comparison plots on input variables for the systematic up/down/nominal samples
+
+ - setTDRStyle.py: used in plotting, just sets some basic plotting options for consistancy
+
+TMVA directory:
+
+The TMVA/test directory contains code for running the BDT one the ntuple samples produced previously (output of the TMVATupleCreator script in the SingleTop/test/macros directory).  This is not all of the code necessary for running TMVA, the TMVA repository must be downloaded on its own, this is just the code for running the tW BDT's.
+
+ - TMVAClassification_tW.C: Used for training the BDT used to separate tW from ttbar.
+
+ - TMVAClassificationApplication_tW.C: Used for applying the tW/ttbar BDT (calculating the discriminant value for data/MC samples).
+
+ - TMVA_tW_tbarW.C: Used for training the tW reconstruction BDT.
+
+In practice, the tW/ttbar BDT is done using condor scripts (tmvaBDT.sh and tmvaBDTSysts.sh) which call the doSamples scripts.
+
+The weights directory contains the TMVA weight files for the tW/ttbar and tW reconstruction BDT's used in the analysis.
+
+The directory TMVA/test/macros contains the code for making BDT plots and the histogram files for theta.  The important files in the macros directory are:
+
+ - thetaInputFileCreator_TopPtandSpinSysts.py: used to create the input file for theta to calculate the total cross section and signficance
+
+ - thetaInputFileCreator_TopPtandSpinSysts_Rmeasurement.py: used to create the input file for the Rmeasurement
+
+ - allPlotsAllSysts.py : creates a root file with histograms of all the important variables (input and BDT variables) for nominal and systematics, which are used to produce plots of the variables with systematic bands on them (using scripts in the ThesisPlots directory)
+
